@@ -158,5 +158,5 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
-# pelican
-output/*
+# pelican does not need that as the output is actually used by github pages
+# output/*
