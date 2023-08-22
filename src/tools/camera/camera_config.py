@@ -12,8 +12,9 @@ import numpy as np
 
 from pathlib import Path
 
+
 def live_calibrate(device_id, CHECKERBOARD, n_matches_needed):
-    """ Find calibration parameters as the user moves a checkerboard in front of the camera """
+    """ calibration generated as a checkerboard is move before camera """
     print("Looking for %s checkerboard" % (CHECKERBOARD,))
 
     # termination criteria
@@ -26,7 +27,6 @@ def live_calibrate(device_id, CHECKERBOARD, n_matches_needed):
     # Defining the world coordinates for 3D points
     objp = np.zeros((1, CHECKERBOARD[0] * CHECKERBOARD[1], 3), np.float32)
     objp[0, :, :2] = np.mgrid[0:CHECKERBOARD[0], 0:CHECKERBOARD[1]].T.reshape(-1, 2)
-    prev_img_shape = None
 
     cap = cv2.VideoCapture(device_id)
     while len(objpoints) < n_matches_needed:
@@ -59,8 +59,10 @@ def load_calibration(PATH_CALIBRATION):
 
 
 def save_calibration(PATH_CALIBRATION, mtx, dist):
-    data = {'camera_matrix': np.asarray(mtx).tolist(), 'dist_coeff': np.asarray(dist).tolist()}
-    json.dump(data, codecs.open(PATH_CALIBRATION, 'w', encoding='utf-8'), separators=(',', ':'), sort_keys=True,indent=4)
+    data = {'camera_matrix': np.asarray(mtx).tolist(), 
+            'dist_coeff': np.asarray(dist).tolist()}
+    json.dump(data, codecs.open(PATH_CALIBRATION, 
+        'w', encoding='utf-8'), separators=(',', ':'), sort_keys=True,indent=4)
 
 
 def calibrate():
@@ -100,3 +102,4 @@ def calibrate():
 
 if __name__ == "__main__":
     calibrate()
+
