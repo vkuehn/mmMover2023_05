@@ -11,3 +11,7 @@ Summary: mm Mover blog
 
 after many years trying bits and peaces with software and electronics. 
 Now starting really to get a bot working
+
+# counter for some tests
+
+0001
