@@ -13,9 +13,9 @@ import numpy as np
 from pathlib import Path
 
 
-def live_calibrate(device_id, CHECKERBOARD, n_matches_needed):
+def live_calibrate(device_id, checkerboard, n_matches_needed):
     """ calibration generated as a checkerboard is move before camera """
-    print("Looking for %s checkerboard" % (CHECKERBOARD,))
+    print("Looking for %s checkerboard" % (checkerboard,))
 
     # termination criteria
     criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 30, 0.001)
@@ -25,16 +25,17 @@ def live_calibrate(device_id, CHECKERBOARD, n_matches_needed):
     objpoints = []  # 3d point in real world space
 
     # Defining the world coordinates for 3D points
-    objp = np.zeros((1, CHECKERBOARD[0] * CHECKERBOARD[1], 3), np.float32)
-    objp[0, :, :2] = np.mgrid[0:CHECKERBOARD[0], 0:CHECKERBOARD[1]].T.reshape(-1, 2)
+    objp = np.zeros((1, checkerboard[0] * checkerboard[1], 3), np.float32)
+    objp[0, :, :2] = np.mgrid[0:checkerboard[0], 0:checkerboard[1]].T.reshape(-1, 2)
 
     cap = cv2.VideoCapture(device_id)
     while len(objpoints) < n_matches_needed:
         ret, frame = cap.read()
 
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-        ret, corners = cv2.findChessboardCorners(gray, CHECKERBOARD,
-                                                 cv2.CALIB_CB_ADAPTIVE_THRESH + cv2.CALIB_CB_FAST_CHECK + cv2.CALIB_CB_NORMALIZE_IMAGE)
+        ret, corners = cv2.findChessboardCorners(gray, checkerboard,
+                                                 cv2.CALIB_CB_ADAPTIVE_THRESH + cv2.CALIB_CB_FAST_CHECK
+                                                 + cv2.CALIB_CB_NORMALIZE_IMAGE)
 
         if ret:
             objpoints.append(objp)
@@ -44,25 +45,22 @@ def live_calibrate(device_id, CHECKERBOARD, n_matches_needed):
     return cv2.calibrateCamera(objpoints, imgpoints, gray.shape[::-1], None, None)
 
 
-def load_calibration(PATH_CALIBRATION):
-    mtx = ""
-    dist = ""
-    if os.path.exists(PATH_CALIBRATION):
-        obj_text = codecs.open(PATH_CALIBRATION, 'r', encoding='utf-8').read()
+def load_calibration(path_calibration):
+    if os.path.exists(path_calibration):
+        obj_text = codecs.open(path_calibration, 'r', encoding='utf-8').read()
         j_camera_config = json.loads(obj_text)
         mtx = np.array(j_camera_config['camera_matrix'])
         dist = np.array(j_camera_config['dist_coeff'])
+        return [mtx, dist]
     else:
-        print("can't find " + PATH_CALIBRATION)
+        print("can't find " + path_calibration)
         sys.exit(1)
-    return [mtx, dist]
 
 
 def save_calibration(PATH_CALIBRATION, mtx, dist):
-    data = {'camera_matrix': np.asarray(mtx).tolist(), 
+    data = {'camera_matrix': np.asarray(mtx).tolist(),
             'dist_coeff': np.asarray(dist).tolist()}
-    json.dump(data, codecs.open(PATH_CALIBRATION, 
-        'w', encoding='utf-8'), separators=(',', ':'), sort_keys=True,indent=4)
+    json.dump(data, codecs.open(PATH_CALIBRATION, 'w', encoding='utf-8'), separators=(',', ':'), sort_keys=True, indent=4)
 
 
 def calibrate():
@@ -78,19 +76,19 @@ def calibrate():
     args = parser.parse_args()
 
     # Defining the dimensions of checkerboard
-    CHECKERBOARD = (args.height, args.width)
-    PATH_CALIBRATION = str(Path.home()) + "/.config/camera_calibration.json"
+    checkboard = (args.height, args.width)
+    path_calibration = str(Path.home()) + "/.config/camera_calibration.json"
 
     print("try finding " + str(args.count) + " checkerboards in camera stream")
-    ret, mtx, dist, rvecs, tvecs = live_calibrate(args.device, CHECKERBOARD, args.count)
+    ret, mtx, dist, rvecs, tvecs = live_calibrate(args.device, checkboard, args.count)
 
     print("Camera matrix : \n")
     print(mtx)
     print("dist : \n")
     print(dist)
-    print("save results to " + PATH_CALIBRATION)
-    save_calibration(PATH_CALIBRATION, mtx, dist)
-    mtx_new, dist_new = load_calibration(PATH_CALIBRATION)
+    print("save results to " + path_calibration)
+    save_calibration(path_calibration, mtx, dist)
+    mtx_new, dist_new = load_calibration(path_calibration)
     if not np.array_equal(mtx, mtx_new):
         print("MTX not saved properly")
     else:
@@ -100,6 +98,6 @@ def calibrate():
     else:
         print("Dist saved properly")
 
+
 if __name__ == "__main__":
     calibrate()
-
