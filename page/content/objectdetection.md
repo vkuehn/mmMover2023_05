@@ -13,4 +13,6 @@ Summary: mm Mover blog
 
 now started merging from old projects.
 
-In particular first the aruco detection which has been used in many other projects
+In particular first the aruco detection which has been used in many other projects.
+Using it as blueprint for opbject detection not only arucos.
+Camera Calibrations is probably not needed anymore but taken over also.
