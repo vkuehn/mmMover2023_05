@@ -7,3 +7,11 @@ this year robot project with more details [here](https://vkuehn.github.io/mmMove
 
 ![overview](./diagrams/overview.drawio.svg)
 
+## Components
+
+[camera](https://github.com/hackffm/actioncam) 
+
+## Seperation
+
+in old projects everything was just in one repository.
+Now it's considered better and easier to maintain if every build block has it's own repo
