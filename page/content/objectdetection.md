@@ -11,8 +11,7 @@ Summary: mm Mover blog
 
 ## aruco
 
-now started merging from old projects.
+stopped merging from old projects as in the past
 
-In particular first the aruco detection which has been used in many other projects.
-Using it as blueprint for opbject detection not only arucos.
-Camera Calibrations is probably not needed anymore but taken over also.
+In particular first the aruco detection which has been used in many other projects owns it's own repo.
+Using it as blueprint for object detection not only arucos.
