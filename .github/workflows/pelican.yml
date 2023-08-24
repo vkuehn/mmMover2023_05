@@ -1,0 +1,17 @@
+name: Deploy Pelican site to GitHub Pages
+on:
+  workflow_call:
+  workflow_dispatch:
+  
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  Deploy:
+    uses: seanh/pelican-github-pages/.github/workflows/pelican.yml@main
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
