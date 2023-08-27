@@ -1,7 +1,7 @@
-name: Deploy Pelican site to GitHub Pages
+name: Create GitHub Pages side with pelican
 on:
   workflow_dispatch:
-    
+
 jobs:
   BuildPage:
     runs-on: ubuntu-latest
