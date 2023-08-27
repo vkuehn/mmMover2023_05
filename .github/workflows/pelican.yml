@@ -1,8 +1,7 @@
 name: Deploy Pelican site to GitHub Pages
 on:
-  push:
-    branches: ["main"]
   workflow_dispatch:
+    
 jobs:
   BuildPage:
     runs-on: ubuntu-latest
