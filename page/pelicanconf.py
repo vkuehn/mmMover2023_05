@@ -2,8 +2,6 @@ AUTHOR = 'vkuehn'
 SITENAME = 'mmMover2023_05'
 SITEURL = 'https://vkuehn.github.io/mmMover2023_05/'
 
-PATH = 'content'
-
 TIMEZONE = 'Europe/Berlin'
 
 DEFAULT_LANG = 'de'
@@ -26,12 +24,12 @@ DEFAULT_PAGINATION = 2
 
 DISPLAY_PAGES_ON_MENU = True
 
-IGNORE_FILES = ['.ipynb*','__pycache__']
+IGNORE_FILES = ['.ipynb*', '__pycache__']
 
 LOAD_CONTENT_CACHE = False
 
-OUTPUT_PATH = 'page/output/'
-PATH = 'page/content'
+OUTPUT_PATH = './output/'
+PATH = './content'
 
 # Uncomment following line if you want document-relative URLs when developing
-#RELATIVE_URLS = True
+# RELATIVE_URLS = True
