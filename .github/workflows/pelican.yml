@@ -18,7 +18,7 @@ jobs:
       - name: Install requirements
         run: pip install "pelican[markdown]"
       - name: Build Pelican site
-        run: pelican --settings ./page/publishconf.py --extra-settings SITEURL='"${{ steps.pages.outputs.base_url }}"'
+        run: cd page && pelican --settings publishconf.py
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
