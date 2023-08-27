@@ -3,8 +3,8 @@ name: Final Main repo maintenance
 
 on:
   # Runs on pushes targeting the default branch
-  push:
-    branches: ["main"]
+  # push:
+  #  branches: ["main"]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -16,9 +16,15 @@ permissions:
   id-token: write
 
 jobs:
-  DeployPageWithPelican:
-    uses: pelican.yml
-    permissions:
-      contents: read
-      pages: write
-      id-token: write
+  one:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+      - name: Configure GitHub Pages
+        id: pages
+        uses: actions/configure-pages@v3        
+      - name: Show page
+        run: echo "${{ steps.pages.outputs.base_url }}"
