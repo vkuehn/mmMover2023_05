@@ -1,3 +1,4 @@
+---
 name: Create GitHub Pages side with pelican
 on:
   workflow_dispatch:
