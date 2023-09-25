@@ -13,6 +13,7 @@ on:
 env: # Comment env block if you don't want to apply fixes
   # Apply linter fixes configuration
   FILTER_REGEX_EXCLUDE: (page/.*\.py)
+  REPOSITORY_DEVSKIM: false
 
 concurrency:
   group: ${{ github.ref }}-${{ github.workflow }}
