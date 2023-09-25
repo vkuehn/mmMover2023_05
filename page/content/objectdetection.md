@@ -13,5 +13,5 @@ Summary: mm Mover blog
 
 stopped merging from old projects as in the past
 
-In particular first the aruco detection which has been used in many other projects owns it's own repo.
+In particular first the aruco detection which has been used in many other projects. It deserves it's own repo.
 Using it as blueprint for object detection not only arucos.
