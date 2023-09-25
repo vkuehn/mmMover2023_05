@@ -13,7 +13,8 @@ on:
 env: # Comment env block if you don't want to apply fixes
   # Apply linter fixes configuration
   FILTER_REGEX_EXCLUDE: (page/.*\.py)
-  DISABLE_LINTERS: (REPOSITORY_DEVSKIM, Checkov)
+  DISABLE_LINTERS: REPOSITORY_DEVSKIM
+  Checkov: --skip-path /
   
 concurrency:
   group: ${{ github.ref }}-${{ github.workflow }}
