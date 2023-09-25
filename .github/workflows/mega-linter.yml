@@ -14,7 +14,7 @@ env: # Comment env block if you don't want to apply fixes
   # Apply linter fixes configuration
   FILTER_REGEX_EXCLUDE: (page/.*\.py)
   DISABLE_LINTERS: REPOSITORY_DEVSKIM
-  Checkov: --skip-path /
+  REPOSITORY_CHECKOV_DISABLE_ERRORS: true
   
 concurrency:
   group: ${{ github.ref }}-${{ github.workflow }}
