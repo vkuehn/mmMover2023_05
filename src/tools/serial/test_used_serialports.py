@@ -1,5 +1,4 @@
 import serial.tools.list_ports
-from time import sleep
 
 import common as cm
 
@@ -18,4 +17,3 @@ for p in ports:
     else:
         sr = str(sr.decode())
     print('Serial result was ' + sr)
-
