@@ -9,7 +9,28 @@ this year robot project with more details [here](https://vkuehn.github.io/mmMove
 
 ## Components
 
-[camera](https://github.com/hackffm/actioncam) 
+should be in seperate repos
+
+### Devices
+
+- [camera](https://github.com/hackffm/actioncam)
+- sensor
+- motor
+
+
+### Controllers
+
+- Vision
+- Motor 
+- Sensors
+- State
+
+## UI
+- Dashboard
+
+## Prozessor
+
+- BPMN
 
 ## Separation
 
